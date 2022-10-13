@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Shopping List</h1>
-        <p>hello ${username}</p>
+        <p>hello ${username} <a href="ShoppingListServlet?action=logout">logout</a></p>
     </body>
 </html>
