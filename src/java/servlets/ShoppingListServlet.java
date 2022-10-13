@@ -7,6 +7,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
@@ -66,15 +67,25 @@ public class ShoppingListServlet extends HttpServlet {
             } else {
                 
                 session.setAttribute("username", username);
+                session.setAttribute("itemList", new ArrayList<String>());
             
-                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+                
                 
             }
+        } else if (action.equals("add")) {
             
+            ArrayList<String> newList = (ArrayList<String>)session.getAttribute("itemList");
+            String addItem = (String)request.getParameter("addItem");
             
-        } 
+            if (addItem != null && !addItem.equals("")) {
+                newList.add(addItem);
+            }
+            
+            session.setAttribute("itemList", newList);
+            
+        }
         
-
+        getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
         
     }
 
