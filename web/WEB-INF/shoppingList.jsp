@@ -29,7 +29,7 @@
         <form action="ShoppingListServlet" method="post">
             <c:forEach items="${itemList}" var="item">
                 <!--<p>${item}</p>-->
-                <label><input type="radio" name="item" value="${item}">${item}<br /></label>
+                <label><input type="radio" name="deleteItem" value="${item}">${item}<br /></label>
             </c:forEach>
             <c:if test="${itemList.size() > 0}">
                 <input type="submit" value="delete">

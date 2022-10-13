@@ -85,6 +85,10 @@ public class ShoppingListServlet extends HttpServlet {
             
         } else if (action.equals("delete")) {
             
+            ArrayList<String> newList = (ArrayList<String>)session.getAttribute("itemList");
+            String deleteItem = (String)request.getParameter("deleteItem");
+            
+            newList.remove(deleteItem);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
