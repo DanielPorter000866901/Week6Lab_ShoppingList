@@ -26,9 +26,15 @@
         </form>
         
         <!--show list of items -->
-        <c:forEach items="${itemList}" var="item">
-            <p>${item}</p>
-        </c:forEach>
-        
+        <form action="ShoppingListServlet" method="post">
+            <c:forEach items="${itemList}" var="item">
+                <!--<p>${item}</p>-->
+                <label><input type="radio" name="item" value="${item}">${item}<br /></label>
+            </c:forEach>
+            <c:if test="${itemList.size() > 0}">
+                <input type="submit" value="delete">
+                <input type="hidden" name="action" value="delete">
+            </c:if>
+        </form>
     </body>
 </html>
