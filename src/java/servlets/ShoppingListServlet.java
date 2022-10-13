@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,13 +24,44 @@ public class ShoppingListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
         
+        HttpSession session = request.getSession();
+        
+//        if already logged in
+        if (session.getAttribute("username") != null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        String action = (String)request.getParameter("action");
+        
+        HttpSession session = request.getSession();
+        
+//        register a user
+        if (action.equals("register")) {
+            
+            String username = request.getParameter("username");
+            
+            // if wrong input
+            if (username.equals("") || username == null) {
+                getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            } else {
+                
+                session.setAttribute("username", username);
+            
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+                
+            }
+            
+            
+        }
         
     }
 

@@ -13,9 +13,6 @@
     </head>
     <body>
         <h1>Shopping List</h1>
-        <form action="ShoppingListServlet" method="post">
-            
-            
-        </form>
+        <p>hello ${username}</p>
     </body>
 </html>
